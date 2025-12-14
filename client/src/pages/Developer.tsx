@@ -13,11 +13,11 @@ export default function Developer() {
       <div className="space-y-6 max-w-6xl mx-auto">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Developer Platform</h1>
-            <p className="text-muted-foreground">Manage your API integration, webhooks, and access documentation.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Plataforma de Desenvolvedor</h1>
+            <p className="text-muted-foreground">Gerencie sua integração de API, webhooks e acesse a documentação.</p>
           </div>
           <Button>
-            <FileJson className="mr-2 h-4 w-4" /> Download OpenAPI Spec
+            <FileJson className="mr-2 h-4 w-4" /> Baixar Especificação OpenAPI
           </Button>
         </div>
 
@@ -26,7 +26,7 @@ export default function Developer() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Activity className="h-5 w-5 text-primary" />
-                API Usage (Last 30 Days)
+                Uso da API (Últimos 30 Dias)
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -44,20 +44,20 @@ export default function Developer() {
                 ))}
               </div>
               <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                <span>May 15</span>
-                <span>Total: 2.4M Requests</span>
-                <span>Jun 14</span>
+                <span>15 Mai</span>
+                <span>Total: 2.4M Requisições</span>
+                <span>14 Jun</span>
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-sm font-medium">Quick Start</CardTitle>
+              <CardTitle className="text-sm font-medium">Início Rápido</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground">Base URL</label>
+                <label className="text-xs font-medium text-muted-foreground">URL Base</label>
                 <div className="flex items-center gap-2 p-2 bg-muted rounded-md border border-border">
                   <code className="text-xs font-mono flex-1 text-primary">https://api.riskguardian.ai/v1</code>
                   <Button variant="ghost" size="icon" className="h-6 w-6">
@@ -66,7 +66,7 @@ export default function Developer() {
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-medium text-muted-foreground">SDK Installation</label>
+                <label className="text-xs font-medium text-muted-foreground">Instalação do SDK</label>
                 <div className="flex items-center gap-2 p-2 bg-muted rounded-md border border-border">
                   <code className="text-xs font-mono flex-1">npm install @riskguardian/sdk</code>
                   <Button variant="ghost" size="icon" className="h-6 w-6">
@@ -80,7 +80,7 @@ export default function Developer() {
 
         <Tabs defaultValue="keys" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="keys" className="flex items-center gap-2"><Key className="h-4 w-4" /> API Keys</TabsTrigger>
+            <TabsTrigger value="keys" className="flex items-center gap-2"><Key className="h-4 w-4" /> Chaves API</TabsTrigger>
             <TabsTrigger value="webhooks" className="flex items-center gap-2"><Webhook className="h-4 w-4" /> Webhooks</TabsTrigger>
             <TabsTrigger value="playground" className="flex items-center gap-2"><Terminal className="h-4 w-4" /> Playground</TabsTrigger>
           </TabsList>
@@ -90,17 +90,17 @@ export default function Developer() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Active API Keys</CardTitle>
-                    <CardDescription>Authentication tokens for your backend services.</CardDescription>
+                    <CardTitle>Chaves de API Ativas</CardTitle>
+                    <CardDescription>Tokens de autenticação para seus serviços de backend.</CardDescription>
                   </div>
-                  <Button size="sm"><Key className="mr-2 h-4 w-4" /> Create New Key</Button>
+                  <Button size="sm"><Key className="mr-2 h-4 w-4" /> Criar Nova Chave</Button>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
                 {[
-                  { name: 'Production Server A', prefix: 'rk_live_9283', created: '2024-01-15', lastUsed: 'Just now', scope: 'Full Access' },
-                  { name: 'Staging Environment', prefix: 'rk_test_8273', created: '2024-03-22', lastUsed: '2 hours ago', scope: 'Read Only' },
-                  { name: 'Mobile App Gateway', prefix: 'rk_live_1928', created: '2024-05-10', lastUsed: '5 mins ago', scope: 'Scan Only' },
+                  { name: 'Servidor de Produção A', prefix: 'rk_live_9283', created: '2024-01-15', lastUsed: 'Agora mesmo', scope: 'Acesso Total' },
+                  { name: 'Ambiente de Staging', prefix: 'rk_test_8273', created: '2024-03-22', lastUsed: '2 horas atrás', scope: 'Somente Leitura' },
+                  { name: 'Gateway de App Móvel', prefix: 'rk_live_1928', created: '2024-05-10', lastUsed: '5 mins atrás', scope: 'Somente Scan' },
                 ].map((key, i) => (
                   <div key={i} className="flex items-center justify-between p-4 rounded-lg border bg-card hover:bg-accent/5 transition-colors">
                     <div className="flex items-center gap-4">
@@ -117,10 +117,10 @@ export default function Developer() {
                     </div>
                     <div className="flex items-center gap-6">
                       <div className="text-right">
-                        <p className="text-xs text-muted-foreground">Last used</p>
+                        <p className="text-xs text-muted-foreground">Último uso</p>
                         <p className="text-sm font-medium">{key.lastUsed}</p>
                       </div>
-                      <Button variant="outline" size="sm">Roll Key</Button>
+                      <Button variant="outline" size="sm">Redefinir</Button>
                     </div>
                   </div>
                 ))}
@@ -133,10 +133,10 @@ export default function Developer() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Webhook Endpoints</CardTitle>
-                    <CardDescription>Real-time event notifications for content takedowns and alerts.</CardDescription>
+                    <CardTitle>Endpoints de Webhook</CardTitle>
+                    <CardDescription>Notificações de eventos em tempo real para remoções de conteúdo e alertas.</CardDescription>
                   </div>
-                  <Button size="sm"><Webhook className="mr-2 h-4 w-4" /> Add Endpoint</Button>
+                  <Button size="sm"><Webhook className="mr-2 h-4 w-4" /> Adicionar Endpoint</Button>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -147,14 +147,14 @@ export default function Developer() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <p className="font-medium">Production Security Ops</p>
-                          <Badge className="bg-green-500/10 text-green-600 border-green-500/20">Active</Badge>
+                          <p className="font-medium">Ops de Segurança (Prod)</p>
+                          <Badge className="bg-green-500/10 text-green-600 border-green-500/20">Ativo</Badge>
                         </div>
                         <p className="text-sm text-muted-foreground font-mono">https://api.yourcorp.com/webhooks/risk-guardian</p>
                       </div>
                     </div>
                     <div className="text-right">
-                        <p className="text-xs text-muted-foreground">Success Rate</p>
+                        <p className="text-xs text-muted-foreground">Taxa de Sucesso</p>
                         <p className="text-sm font-medium text-green-500">99.8%</p>
                     </div>
                   </div>
@@ -166,7 +166,7 @@ export default function Developer() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[500px]">
               <Card className="flex flex-col">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">Request</CardTitle>
+                  <CardTitle className="text-sm">Requisição</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 bg-muted/30 p-0 font-mono text-sm relative">
                   <div className="absolute top-0 left-0 right-0 p-2 bg-muted border-b flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function Developer() {
                   <textarea 
                     className="w-full h-full pt-12 p-4 bg-transparent border-none resize-none focus:ring-0"
                     defaultValue={`{
-  "content": "Breaking: Aliens landed in Times Square!",
+  "content": "Urgente: Alienígenas pousaram na Times Square!",
   "type": "text",
   "context": "social_media",
   "metadata": {
@@ -190,7 +190,7 @@ export default function Developer() {
 
               <Card className="flex flex-col">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm">Response</CardTitle>
+                  <CardTitle className="text-sm">Resposta</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 bg-black/90 p-4 font-mono text-sm text-green-400 overflow-auto">
                   <pre>{`{
@@ -208,7 +208,7 @@ export default function Developer() {
               </Card>
             </div>
             <div className="flex justify-end">
-              <Button><Zap className="mr-2 h-4 w-4" /> Send Request</Button>
+              <Button><Zap className="mr-2 h-4 w-4" /> Enviar Requisição</Button>
             </div>
           </TabsContent>
         </Tabs>
