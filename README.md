@@ -1,94 +1,292 @@
-# 🛡️ Risk Guardian - AI Fake News Defense Platform
+# Risk Guardian Platform
 
-**Risk Guardian** is a premium Enterprise SaaS platform designed to detect, analyze, and neutralize AI-generated misinformation, deepfakes, and coordinated bot attacks. It serves Government agencies, Social Media platforms, and large Enterprises by providing real-time threat intelligence and automated compliance enforcement.
+Uma plataforma empresarial de defesa cognitiva e detecção de desinformação em tempo real, projetada para identificar, analisar e mitigar campanhas de desinformação coordenadas (CIB) e conteúdo gerado por IA (Deepfakes).
 
-## 🚀 Project Overview
-
-This repository contains the **Frontend Architecture** and **UX Prototype** for the Risk Guardian platform. It demonstrates a high-fidelity, "Series A ready" product interface designed for high-trust environments (Cyber Intelligence / GovTech).
-
-### 🎯 Core Value Proposition
-*   **AI vs. AI Defense**: Using advanced neural networks to detect synthetic media (Deepfakes, Voice Clones, LLM Text).
-*   **Virality Containment**: Visualizing and stopping the spread of misinformation before it becomes an outbreak.
-*   **Immutable Audit**: Blockchain-ready ledger for all system decisions (Flagging, Blocking, Takedowns).
+Este projeto utiliza uma arquitetura de microsserviços moderna, separando o frontend (React), o backend de orquestração (NestJS) e o motor de inteligência artificial (Python/FastAPI).
 
 ---
 
-## 🏗️ Technical Stack (Frontend Prototype)
+## 🏗️ Arquitetura do Sistema
 
-*   **Framework**: React 19 + Vite
-*   **Routing**: Wouter (Lightweight routing)
-*   **Styling**: Tailwind CSS v4 + Shadcn/UI (Custom "Cyber Intel" Dark Theme)
-*   **Visualization**: Recharts (Real-time threat graphs)
-*   **Icons**: Lucide React
-*   **State**: TanStack Query (Mocked data layer)
+A solução é composta por três componentes principais que devem ser executados em contêineres ou serviços separados:
 
----
+1.  **Frontend (Client)**: Interface do usuário em React/Vite.
+2.  **Backend (API Gateway & Orquestrador)**: NestJS com Prisma ORM.
+3.  **AI Engine (Motor de Inferência)**: Python com FastAPI/PyTorch.
 
-## 🧠 ML/AI Ops & Data Quality Alignment
+### Fluxo de Dados
 
-The Risk Guardian platform is architected to be the "Control Plane" for a robust MLOps pipeline. Here is how the interface aligns with Data Quality and ML Operations:
-
-### 1. Data Quality Gatekeepers (Input Layer)
-*   **Ingestion Validation**: The **Developer API** (`/v1/content/analyze`) acts as the first gatekeeper. It validates schema integrity, metadata presence (Author, Timestamp, Platform), and media formats before processing.
-*   **Anomalous Input Detection**: The **Dashboard** visualizes spikes in "Organic vs. AI" traffic. Sudden shifts in data distribution (Data Drift) are flagged as "High Threat Levels", alerting Data Engineers to potential data poisoning attacks.
-
-### 2. Model Registry & Governance (MLOps)
-*   **Model Versioning**: The **AI Detection Models** page (`/compliance`) acts as a Model Registry. It allows Ops teams to:
-    *   Toggle specific models (e.g., "LLM Hallucination Detector v4") on/off in real-time.
-    *   Monitor accuracy metrics (Precision/Recall) per model.
-    *   A/B test new experimental models (e.g., "Experimental: Deepfake Audio") on live traffic without full deployment.
-*   **Performance Monitoring**: The **Virality Map** and **Dashboard** provide feedback loops. If a model's confidence score drops (Model Drift), alerts are triggered in the **Settings** module.
-
-### 3. Human-in-the-Loop (Quality Assurance)
-*   **Audit Ledger**: The **Verification Ledger** (`/audit`) is the "Ground Truth" store. When the AI is uncertain (confidence < threshold), items are flagged for human review. The analyst's decision is recorded and fed back into the training dataset to improve future model performance (Reinforcement Learning from Human Feedback - RLHF).
-
-### 4. Explainability & Trust
-*   **Granular Scoring**: The **Content Scanner** doesn't just say "Fake". It provides a breakdown: "AI Probability: 99%", "Fake News Score: 94%", "Virality Score: 88%". This transparency builds trust with non-technical stakeholders (Government/Legal).
+1.  O usuário envia uma URL ou Texto via Frontend.
+2.  O Frontend chama a API do NestJS (`POST /api/scan`).
+3.  O NestJS salva a requisição no PostgreSQL (status: `PENDING`) e envia para a fila de processamento (RabbitMQ/Redis) ou chama o serviço Python diretamente.
+4.  O Motor de IA (Python) processa o conteúdo (detecta fake news, deepfakes, sentimento).
+5.  O Motor de IA devolve o resultado para o NestJS.
+6.  O NestJS atualiza o banco de dados e notifica o frontend (via WebSocket ou Polling).
 
 ---
 
-## 📦 Key Modules
+## 🚀 1. Frontend (React + Vite)
 
-### 1. 🌍 Mission Control (Dashboard)
-Real-time situational awareness.
-*   **Features**: Live threat feed, AI/Organic traffic correlation, Threat Level status.
+Este repositório contém o código fonte do frontend atual.
 
-### 2. 🔍 Content Scanner
-Deep forensic analysis of content.
-*   **Features**: Frame-by-frame video analysis (mocked), text pattern recognition, author credibility scoring.
+### Pré-requisitos
+*   Node.js 20+
+*   npm ou yarn
 
-### 3. 🕸️ Virality Map
-Propagation analysis.
-*   **Features**: Network graph of botnet clusters, top spreader leaderboards, containment actions.
+### Instalação e Execução
+```bash
+# Instalar dependências
+npm install
 
-### 4. 🤖 AI Detection Models
-Configuration of the neural defense grid.
-*   **Features**: Enable/Disable specific detection engines (Text, Audio, Video, Image).
+# Rodar em modo de desenvolvimento
+npm run dev:client
+```
 
-### 5. 👨‍💻 Developer Platform
-B2B Integration hub.
-*   **Features**: API Key management, Webhook configuration, Usage analytics, Interactive Playground.
+A aplicação estará disponível em `http://localhost:5000`.
+
+### Principais Bibliotecas
+*   **UI**: TailwindCSS, Radix UI, Lucide Icons.
+*   **Estado**: React Query (TanStack Query).
+*   **Gráficos**: Recharts.
+*   **Mapas**: SVG Interativo Customizado.
 
 ---
 
-## 🔧 Setup & Installation
+## 🛠️ 2. Backend (NestJS + Prisma)
 
-1.  **Install Dependencies**:
+> **Nota**: O código abaixo é um guia de implementação para ser criado em um repositório separado ou na pasta `server/` se migrado para full-stack.
+
+### Estrutura Recomendada
+```
+backend/
+├── src/
+│   ├── auth/           # Autenticação (JWT, Passport)
+│   ├── scans/          # Gerenciamento de Scans
+│   ├── reports/        # Geração de Relatórios
+│   ├── webhooks/       # Integrações Externas
+│   ├── prisma/         # Serviço do Prisma
+│   └── app.module.ts
+├── prisma/
+│   └── schema.prisma   # Definição do Banco de Dados
+└── docker-compose.yml
+```
+
+### Configuração Inicial
+
+1.  **Criar projeto NestJS**:
     ```bash
-    npm install
+    npm i -g @nestjs/cli
+    nest new risk-guardian-backend
+    cd risk-guardian-backend
     ```
 
-2.  **Start Development Server**:
+2.  **Instalar Prisma e PostgreSQL**:
     ```bash
-    npm run dev
+    npm install prisma --save-dev
+    npm install @prisma/client
+    npx prisma init
     ```
 
-3.  **Build for Production**:
-    ```bash
-    npm run build
+3.  **Definir Schema (`prisma/schema.prisma`)**:
+
+    ```prisma
+    generator client {
+      provider = "prisma-client-js"
+    }
+
+    datasource db {
+      provider = "postgresql"
+      url      = env("DATABASE_URL")
+    }
+
+    model User {
+      id        String   @id @default(uuid())
+      email     String   @unique
+      password  String
+      role      Role     @default(ANALYST)
+      scans     Scan[]
+      createdAt DateTime @default(now())
+    }
+
+    model Scan {
+      id            String      @id @default(uuid())
+      content       String      @db.Text
+      sourceUrl     String?
+      status        ScanStatus  @default(PENDING)
+      riskScore     Float?      // 0-100
+      aiProbability Float?      // 0-100
+      verdict       Verdict?
+      metadata      Json?
+      userId        String
+      user          User        @relation(fields: [userId], references: [id])
+      createdAt     DateTime    @default(now())
+    }
+
+    enum Role {
+      ADMIN
+      ANALYST
+      VIEWER
+    }
+
+    enum ScanStatus {
+      PENDING
+      PROCESSING
+      COMPLETED
+      FAILED
+    }
+
+    enum Verdict {
+      REAL
+      FAKE
+      SATIRE
+      UNVERIFIED
+    }
     ```
+
+4.  **Rotas Consolidadas (Controllers)**:
+
+    **Auth Controller (`auth.controller.ts`)**
+    *   `POST /auth/login`: Retorna JWT.
+    *   `POST /auth/register`: Cria novo usuário.
+
+    **Scan Controller (`scans.controller.ts`)**
+    *   `POST /scans`: Inicia uma nova análise.
+        *   Body: `{ content: string, url?: string }`
+    *   `GET /scans`: Lista histórico com paginação.
+    *   `GET /scans/:id`: Detalhes de uma análise.
+    *   `POST /scans/:id/takedown`: Aciona webhook de remoção.
+
+    **Dashboard Controller (`dashboard.controller.ts`)**
+    *   `GET /dashboard/stats`: Retorna contadores (Total Scans, Ameaças Ativas).
+    *   `GET /dashboard/virality`: Dados para o mapa de viralidade.
 
 ---
 
-## 📄 License
-Proprietary & Confidential - Risk Guardian Inc.
+## 🧠 3. AI Engine (Python)
+
+Este serviço deve expor uma API REST (FastAPI) ou consumir de uma fila para realizar a inferência pesada.
+
+### Estrutura Recomendada
+```
+ai-engine/
+├── app/
+│   ├── main.py            # Entrypoint FastAPI
+│   ├── models/            # Modelos carregados (Torch/Pickle)
+│   ├── processors/        # Lógica de limpeza de texto/imagem
+│   └── routers/           # Rotas da API
+├── requirements.txt
+└── Dockerfile
+```
+
+### Implementação Básica (`main.py`)
+
+```python
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+import random # Substituir por inferência real
+
+app = FastAPI(title="Risk Guardian AI Engine")
+
+class ScanRequest(BaseModel):
+    text: str
+    url: str | None = None
+
+class ScanResult(BaseModel):
+    risk_score: float
+    ai_probability: float
+    verdict: str
+    entities: list[str]
+
+@app.post("/predict", response_model=ScanResult)
+async def predict_risk(request: ScanRequest):
+    # 1. Carregar modelo (ex: BERT fine-tuned)
+    # 2. Pré-processar texto
+    # 3. Inferência
+    
+    # Simulação:
+    risk_score = random.uniform(0, 100)
+    ai_prob = random.uniform(0, 100)
+    
+    verdict = "REAL"
+    if risk_score > 75:
+        verdict = "FAKE"
+    elif risk_score > 50:
+        verdict = "UNVERIFIED"
+        
+    return {
+        "risk_score": risk_score,
+        "ai_probability": ai_prob,
+        "verdict": verdict,
+        "entities": ["entity1", "entity2"]
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "online", "gpu_available": False}
+```
+
+### Integração NestJS -> Python
+
+No serviço `ScanService` do NestJS, utilize o `HttpModule` para chamar o serviço Python:
+
+```typescript
+// scans.service.ts (Exemplo Conceitual)
+async analyzeContent(text: string) {
+  const aiResponse = await this.httpService.axiosRef.post('http://ai-engine:8000/predict', {
+    text: text
+  });
+  
+  return {
+    riskScore: aiResponse.data.risk_score,
+    verdict: aiResponse.data.verdict
+    // ... mapear outros campos
+  };
+}
+```
+
+---
+
+## 🔄 Fluxo de Desenvolvimento Local (Full-Stack)
+
+Para rodar todo o ecossistema localmente, recomenda-se o uso do Docker Compose.
+
+**`docker-compose.yml` (Exemplo)**:
+
+```yaml
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: riskguardian
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/riskguardian
+      AI_SERVICE_URL: http://ai-engine:8000
+    depends_on:
+      - postgres
+      - ai-engine
+
+  ai-engine:
+    build: ./ai-engine
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5000:5000"
+```
+
+## 📚 Documentação Adicional
+
+*   **API Specs**: A especificação OpenAPI (Swagger) será gerada automaticamente pelo NestJS em `/api/docs`.
+*   **Modelos de IA**: A documentação dos modelos (acurácia, datasets de treino) deve ser mantida na pasta `ai-engine/docs`.
