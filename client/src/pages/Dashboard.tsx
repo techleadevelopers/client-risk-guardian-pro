@@ -21,15 +21,15 @@ export default function Dashboard() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
            <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Mission Control</h1>
-            <p className="text-muted-foreground">Real-time surveillance of disinformation vectors and AI-generated content.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Painel de Controle</h1>
+            <p className="text-muted-foreground">Vigilância em tempo real de vetores de desinformação e conteúdo gerado por IA.</p>
           </div>
           <div className="flex items-center gap-2">
             <span className="flex h-3 w-3 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
             </span>
-            <span className="text-sm font-medium text-destructive">High Threat Level: Election Interference</span>
+            <span className="text-sm font-medium text-destructive">Nível de Ameaça Alto: Interferência Eleitoral</span>
           </div>
         </div>
 
@@ -37,52 +37,52 @@ export default function Dashboard() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card className="border-l-4 border-l-primary shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Items Scanned</CardTitle>
+              <CardTitle className="text-sm font-medium">Itens Escaneados</CardTitle>
               <Globe className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{mockStats.scannedItems.toLocaleString()}</div>
               <p className="text-xs text-muted-foreground">
-                Across 5 social platforms
+                Em 5 plataformas sociais
               </p>
             </CardContent>
           </Card>
           
           <Card className="border-l-4 border-l-destructive shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Fake News Detected</CardTitle>
+              <CardTitle className="text-sm font-medium">Fake News Detectadas</CardTitle>
               <AlertTriangle className="h-4 w-4 text-destructive" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{mockStats.fakeNewsDetected.toLocaleString()}</div>
               <p className="text-xs text-muted-foreground">
-                2.8% of total traffic
+                2.8% do tráfego total
               </p>
             </CardContent>
           </Card>
 
           <Card className="border-l-4 border-l-purple-500 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">AI Generated (Deepfake)</CardTitle>
+              <CardTitle className="text-sm font-medium">Gerado por IA (Deepfake)</CardTitle>
               <Bot className="h-4 w-4 text-purple-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{mockStats.aiGeneratedContent.toLocaleString()}</div>
               <p className="text-xs text-muted-foreground">
-                Avg. Confidence: {mockStats.avgAiConfidence}%
+                Confiança Média: {mockStats.avgAiConfidence}%
               </p>
             </CardContent>
           </Card>
 
           <Card className="border-l-4 border-l-green-500 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Auto-Takedowns</CardTitle>
+              <CardTitle className="text-sm font-medium">Remoções Automáticas</CardTitle>
               <Zap className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{mockStats.takedownsIssued}</div>
               <p className="text-xs text-muted-foreground">
-                Sent to platform APIs
+                Enviado para APIs das plataformas
               </p>
             </CardContent>
           </Card>
@@ -92,8 +92,8 @@ export default function Dashboard() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
           <Card className="col-span-4 shadow-sm">
             <CardHeader>
-              <CardTitle>AI vs. Organic Disinformation Spike</CardTitle>
-              <CardDescription>Correlation between bot activity and viral fake news spread.</CardDescription>
+              <CardTitle>IA vs. Pico de Desinformação Orgânica</CardTitle>
+              <CardDescription>Correlação entre atividade de bots e disseminação viral de fake news.</CardDescription>
             </CardHeader>
             <CardContent className="pl-2">
               <ResponsiveContainer width="100%" height={350}>
@@ -137,7 +137,7 @@ export default function Dashboard() {
                     stackId="1"
                     stroke="hsl(var(--muted-foreground))" 
                     fill="url(#colorOrganic)" 
-                    name="Organic Spread"
+                    name="Disseminação Orgânica"
                   />
                   <Area 
                     type="monotone" 
@@ -146,7 +146,7 @@ export default function Dashboard() {
                     stroke="#a855f7" 
                     strokeWidth={2}
                     fill="url(#colorAi)" 
-                    name="AI/Bot Activity"
+                    name="Atividade de IA/Bot"
                   />
                 </AreaChart>
               </ResponsiveContainer>
@@ -155,8 +155,8 @@ export default function Dashboard() {
 
           <Card className="col-span-3 shadow-sm">
             <CardHeader>
-              <CardTitle>Live Threat Feed</CardTitle>
-              <CardDescription>Viral content flagged as synthetic or misleading.</CardDescription>
+              <CardTitle>Feed de Ameaças em Tempo Real</CardTitle>
+              <CardDescription>Conteúdo viral sinalizado como sintético ou enganoso.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -174,7 +174,7 @@ export default function Dashboard() {
                           <p className="text-sm font-bold leading-none truncate">{item.platform}</p>
                           {item.aiProbability > 80 && (
                             <span className="text-[10px] font-bold px-1 rounded bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
-                              AI: {item.aiProbability}%
+                              IA: {item.aiProbability}%
                             </span>
                           )}
                         </div>
@@ -187,14 +187,14 @@ export default function Dashboard() {
                         <span className="text-xs font-mono text-muted-foreground">{item.author}</span>
                         <div className="flex items-center gap-1 text-xs text-orange-600 font-medium">
                            <Share2 className="h-3 w-3" />
-                           Viral Score: {item.viralityScore}
+                           Pontuação Viral: {item.viralityScore}
                         </div>
                       </div>
                     </div>
                   </div>
                 ))}
                 <button className="w-full py-2 text-sm text-primary bg-primary/5 hover:bg-primary/10 rounded-md font-medium flex items-center justify-center transition-colors">
-                  Open Scanner <ArrowUpRight className="ml-1 h-3 w-3" />
+                  Abrir Scanner <ArrowUpRight className="ml-1 h-3 w-3" />
                 </button>
               </div>
             </CardContent>
