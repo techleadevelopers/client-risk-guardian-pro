@@ -10,15 +10,15 @@ export default function ContentList() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">Content Scanner</h1>
-            <p className="text-muted-foreground">Deep analysis of social feeds for AI manipulation and disinformation.</p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground">Scanner de Conteúdo</h1>
+            <p className="text-muted-foreground">Análise profunda de feeds sociais para manipulação de IA e desinformação.</p>
           </div>
           <div className="flex gap-2">
              <button className="flex items-center gap-2 px-3 py-2 bg-background border border-border rounded-md text-sm font-medium hover:bg-accent transition-colors">
-              <Filter className="h-4 w-4" /> Filter Sources
+              <Filter className="h-4 w-4" /> Filtrar Fontes
             </button>
             <button className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
-              <Download className="h-4 w-4" /> Export Evidence
+              <Download className="h-4 w-4" /> Exportar Evidências
             </button>
           </div>
         </div>
@@ -30,12 +30,12 @@ export default function ContentList() {
                 <thead className="[&_tr]:border-b bg-muted/30">
                   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[100px]">ID</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Platform</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Content Analysis</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">AI Probability</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Fake News Score</th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Plataforma</th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Análise de Conteúdo</th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Probabilidade de IA</th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Pontuação de Fake News</th>
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[120px]">Status</th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[100px]">Action</th>
+                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[100px]">Ação</th>
                   </tr>
                 </thead>
                 <tbody className="[&_tr:last-child]:border-0">
@@ -54,10 +54,10 @@ export default function ContentList() {
                             {item.snippet}
                           </div>
                           <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <span>Author: {item.author}</span>
+                            <span>Autor: {item.author}</span>
                             <span>•</span>
                             <span className="flex items-center gap-1 text-orange-600">
-                              <Share2 className="h-3 w-3" /> Viral Score: {item.viralityScore}
+                              <Share2 className="h-3 w-3" /> Pontuação Viral: {item.viralityScore}
                             </span>
                           </div>
                         </div>
@@ -72,23 +72,23 @@ export default function ContentList() {
                           )}>
                             {item.aiProbability > 80 ? <Bot className="h-4 w-4" /> : <span className="text-xs font-bold">{item.aiProbability}%</span>}
                           </div>
-                          {item.aiProbability > 80 && <span className="text-xs font-bold text-purple-600">High</span>}
+                          {item.aiProbability > 80 && <span className="text-xs font-bold text-purple-600">Alto</span>}
                         </div>
                       </td>
                       <td className="p-4">
-                         <div className="w-full max-w-[80px]">
-                           <div className="flex justify-between text-[10px] mb-1">
-                             <span className={item.fakeNewsScore > 80 ? "text-destructive font-bold" : "text-muted-foreground"}>
-                               {item.fakeNewsScore}/100
-                             </span>
-                           </div>
-                           <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
-                             <div 
-                               className={cn("h-full rounded-full", item.fakeNewsScore > 80 ? "bg-destructive" : item.fakeNewsScore > 50 ? "bg-orange-500" : "bg-green-500")} 
-                               style={{ width: `${item.fakeNewsScore}%` }}
-                             />
-                           </div>
-                         </div>
+                        <div className="w-full max-w-[80px]">
+                          <div className="flex justify-between text-[10px] mb-1">
+                            <span className={item.fakeNewsScore > 80 ? "text-destructive font-bold" : "text-muted-foreground"}>
+                              {item.fakeNewsScore}/100
+                            </span>
+                          </div>
+                          <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden">
+                            <div 
+                              className={cn("h-full rounded-full", item.fakeNewsScore > 80 ? "bg-destructive" : item.fakeNewsScore > 50 ? "bg-orange-500" : "bg-green-500")} 
+                              style={{ width: `${item.fakeNewsScore}%` }}
+                            />
+                          </div>
+                        </div>
                       </td>
                       <td className="p-4">
                         <div className={cn(
@@ -104,7 +104,7 @@ export default function ContentList() {
                       </td>
                       <td className="p-4">
                          <button className="text-primary hover:text-primary/80 text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3 rounded-md transition-colors">
-                           Investigate
+                           Investigar
                          </button>
                       </td>
                     </tr>
