@@ -1,0 +1,106 @@
+.distribution-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.map-point {
+  cursor: pointer;
+  outline: none;
+  z-index: 20;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease-in-out 0.25s, width 0.25s ease-in-out 0.25s, height 0.25s ease-in-out 0.25s, z-index 0.25s ease-in-out 0.25s;
+  background: rgba(0, 0, 0, 0.8);
+  border: 4px solid hsl(var(--destructive));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+}
+
+.map-point.safe {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 15px rgba(var(--primary), 0.5);
+}
+
+.map-point.warning {
+  border-color: #f97316; /* Orange */
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+}
+
+.map-point .content {
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none; /* Allow clicks to pass through initially */
+}
+
+/* Pulse animation for the core */
+@keyframes pulse-ring {
+  0% { transform: scale(0.33); }
+  80%, 100% { opacity: 0; }
+}
+
+.map-point::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.5;
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.map-point:active, .map-point:focus, .map-point:hover {
+  margin: 0;
+  padding: 0;
+  opacity: 1;
+  width: 300px;
+  height: 220px;
+  color: hsl(var(--foreground));
+  z-index: 50;
+  transition: opacity 0.25s ease-in-out, width 0.25s ease-in-out, height 0.25s ease-in-out;
+  background: hsl(var(--card));
+  border-width: 2px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  transform: translate(-50%, -50%);
+}
+
+.map-point:active .content, .map-point:focus .content, .map-point:hover .content {
+  opacity: 1;
+  transition: opacity 0.25s ease-in-out 0.25s;
+  pointer-events: auto;
+}
+
+.map-point h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: hsl(var(--foreground));
+}
+
+.map-point p {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.5;
+  padding: 0 1.5rem;
+}
