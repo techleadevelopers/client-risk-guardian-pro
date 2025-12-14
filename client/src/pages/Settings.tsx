@@ -14,16 +14,16 @@ export default function Settings() {
     <Layout>
       <div className="space-y-6 max-w-5xl mx-auto">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-foreground">System Settings</h1>
-          <p className="text-muted-foreground">Manage global configurations, API access, and detection thresholds.</p>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">Configurações do Sistema</h1>
+          <p className="text-muted-foreground">Gerencie configurações globais, acesso à API e limites de detecção.</p>
         </div>
 
         <Tabs defaultValue="detection" className="space-y-6">
           <TabsList className="grid w-full grid-cols-4 lg:w-[600px]">
-            <TabsTrigger value="detection">Detection</TabsTrigger>
-            <TabsTrigger value="api">API Access</TabsTrigger>
-            <TabsTrigger value="notifications">Alerts</TabsTrigger>
-            <TabsTrigger value="team">Team</TabsTrigger>
+            <TabsTrigger value="detection">Detecção</TabsTrigger>
+            <TabsTrigger value="api">Acesso API</TabsTrigger>
+            <TabsTrigger value="notifications">Alertas</TabsTrigger>
+            <TabsTrigger value="team">Equipe</TabsTrigger>
           </TabsList>
 
           <TabsContent value="detection" className="space-y-6">
@@ -31,18 +31,18 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Eye className="h-5 w-5 text-primary" />
-                  Sensitivity Thresholds
+                  Limiares de Sensibilidade
                 </CardTitle>
                 <CardDescription>
-                  Adjust how aggressive the AI should be when flagging content.
+                  Ajuste quão agressiva a IA deve ser ao sinalizar conteúdo.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-8">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                      <label className="text-sm font-medium">Fake News Confidence Threshold</label>
-                      <p className="text-xs text-muted-foreground">Minimum score (0-100) to flag content as potential misinformation.</p>
+                      <label className="text-sm font-medium">Limiar de Confiança de Fake News</label>
+                      <p className="text-xs text-muted-foreground">Pontuação mínima (0-100) para sinalizar conteúdo como potencial desinformação.</p>
                     </div>
                     <Badge variant="secondary" className="font-mono">75%</Badge>
                   </div>
@@ -54,8 +54,8 @@ export default function Settings() {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="space-y-0.5">
-                      <label className="text-sm font-medium">Deepfake Detection Strictness</label>
-                      <p className="text-xs text-muted-foreground">Lower values increase sensitivity but may cause false positives.</p>
+                      <label className="text-sm font-medium">Rigor na Detecção de Deepfake</label>
+                      <p className="text-xs text-muted-foreground">Valores menores aumentam a sensibilidade mas podem causar falsos positivos.</p>
                     </div>
                     <Badge variant="secondary" className="font-mono">88%</Badge>
                   </div>
@@ -66,8 +66,8 @@ export default function Settings() {
 
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <label className="text-sm font-medium">Auto-Takedown for Critical Threats</label>
-                    <p className="text-xs text-muted-foreground">Automatically issue takedowns for content with &gt;99% risk score.</p>
+                    <label className="text-sm font-medium">Remoção Automática para Ameaças Críticas</label>
+                    <p className="text-xs text-muted-foreground">Emitir remoções automaticamente para conteúdo com risco &gt;99%.</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
@@ -78,16 +78,16 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
-                  Whitelisted Domains
+                  Domínios na Lista Branca
                 </CardTitle>
                 <CardDescription>
-                  Trusted sources that bypass the risk engine.
+                  Fontes confiáveis que ignoram o motor de risco.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
-                  <Input placeholder="Enter domain (e.g., gov.br)" className="font-mono text-sm" />
-                  <Button variant="secondary">Add</Button>
+                  <Input placeholder="Inserir domínio (ex: gov.br)" className="font-mono text-sm" />
+                  <Button variant="secondary">Adicionar</Button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {['gov.br', 'who.int', 'un.org', 'reuters.com'].map(domain => (
@@ -106,37 +106,37 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Key className="h-5 w-5 text-primary" />
-                  API Keys
+                  Chaves API
                 </CardTitle>
                 <CardDescription>
-                  Manage authentication tokens for external integrations.
+                  Gerencie tokens de autenticação para integrações externas.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <div className="p-4 rounded-md border bg-muted/30 flex items-center justify-between">
                     <div className="space-y-1">
-                      <p className="font-medium text-sm">Production Key (v1)</p>
+                      <p className="font-medium text-sm">Chave de Produção (v1)</p>
                       <p className="font-mono text-xs text-muted-foreground">rk_live_8374...9283</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge className="bg-green-500/10 text-green-600 border-green-500/20">Active</Badge>
-                      <Button variant="ghost" size="sm">Roll Key</Button>
+                      <Badge className="bg-green-500/10 text-green-600 border-green-500/20">Ativa</Badge>
+                      <Button variant="ghost" size="sm">Redefinir</Button>
                     </div>
                   </div>
 
                   <div className="p-4 rounded-md border bg-muted/30 flex items-center justify-between">
                     <div className="space-y-1">
-                      <p className="font-medium text-sm">Development Key</p>
+                      <p className="font-medium text-sm">Chave de Desenvolvimento</p>
                       <p className="font-mono text-xs text-muted-foreground">rk_test_1928...3821</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Badge variant="outline">Test Mode</Badge>
-                      <Button variant="ghost" size="sm">Roll Key</Button>
+                      <Badge variant="outline">Modo de Teste</Badge>
+                      <Button variant="ghost" size="sm">Redefinir</Button>
                     </div>
                   </div>
                 </div>
-                <Button className="w-full">Generate New Key</Button>
+                <Button className="w-full">Gerar Nova Chave</Button>
               </CardContent>
             </Card>
           </TabsContent>
@@ -146,33 +146,33 @@ export default function Settings() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Bell className="h-5 w-5 text-primary" />
-                  Alert Channels
+                  Canais de Alerta
                 </CardTitle>
                 <CardDescription>
-                  Configure where critical alerts are sent.
+                  Configure onde alertas críticos são enviados.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                  <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <label className="text-sm font-medium">Critical Alerts (Email)</label>
-                    <p className="text-xs text-muted-foreground">Immediate notification for &gt;90% risk items.</p>
+                    <label className="text-sm font-medium">Alertas Críticos (Email)</label>
+                    <p className="text-xs text-muted-foreground">Notificação imediata para itens de risco &gt;90%.</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <label className="text-sm font-medium">Slack Integration</label>
-                    <p className="text-xs text-muted-foreground">Post alerts to #security-ops.</p>
+                    <label className="text-sm font-medium">Integração Slack</label>
+                    <p className="text-xs text-muted-foreground">Postar alertas em #security-ops.</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <label className="text-sm font-medium">Weekly Digest</label>
-                    <p className="text-xs text-muted-foreground">Summary of blocked content and false positives.</p>
+                    <label className="text-sm font-medium">Resumo Semanal</label>
+                    <p className="text-xs text-muted-foreground">Resumo de conteúdo bloqueado e falsos positivos.</p>
                   </div>
                   <Switch />
                 </div>
@@ -181,9 +181,9 @@ export default function Settings() {
           </TabsContent>
           
           <div className="flex justify-end gap-4 pt-4">
-             <Button variant="outline">Discard Changes</Button>
+             <Button variant="outline">Descartar Alterações</Button>
              <Button className="flex items-center gap-2">
-               <Save className="h-4 w-4" /> Save Configuration
+               <Save className="h-4 w-4" /> Salvar Configuração
              </Button>
           </div>
         </Tabs>
